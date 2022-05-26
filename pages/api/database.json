@@ -1,0 +1,40 @@
+{
+    "todos": [
+        {
+            "id": 1653162844237,
+            "title": "spend time with your family",
+            "checked": false,
+            "pinned": false
+        },
+        {
+            "id": 1653235210971,
+            "title": "do your best",
+            "checked": false,
+            "pinned": false
+        },
+        {
+            "id": 1653267892952,
+            "title": "don't forget mentoring activity",
+            "checked": false,
+            "pinned": false
+        },
+        {
+            "id": 1653302920187,
+            "title": "don't forget to read medium articles",
+            "checked": false,
+            "pinned": false
+        },
+        {
+            "id": 1653306466966,
+            "title": "don't be afraid to try",
+            "checked": false,
+            "pinned": false
+        },
+        {
+            "id": 1653306468973,
+            "title": "work hard",
+            "checked": false,
+            "pinned": false
+        }
+    ]
+}

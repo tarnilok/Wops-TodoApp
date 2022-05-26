@@ -1,8 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Westerops Todo App
+
+This is a [Next.js](https://nextjs.org/) project that created with [`npx create-next-app@latest`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
 
 ## Getting Started
 
-First, run the development server:
+First, install npm packages:
+
+```bash
+npm install
+# or
+yarn
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -11,24 +21,116 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Tasks
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+* Build the design according to `figma-design.png` (as pixel perfect as possible)
 
-## Learn More
+*   You can find design details in `figma-design-details.png`
+*   You can also find design details and icons&logo files in [Figma](https://www.figma.com/file/8AUZwSFrERAZQ0TkpoWHV2/fe_case?node-id=0%3A1)
+*   You can replace the icons with the icon you want.
 
-To learn more about Next.js, take a look at the following resources:
+User should be able to:
+* create new todo
+* remove todo
+* update todo
+* pin the todo
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Nice to have:
+* Responsive design (for web, tablet and mobile screens)
+* Use of TypeScript (you can start a new project with next.js typescript template)
+* Use of TailwindCSS
+* Use of localstorage
+* Git history and commit messages
+* Project deployment (to the vercel-netlify-heroku-firebase etc)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Create Todo**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    POST /api/todos
+
+| Parameter | Type     | Description              |
+| :-------- | :------- | :----------------------- |
+| `title`   | `string` | **Required**. Todo Title |
+
+**CURL Example:**
+
+    curl -X POST http://localhost:3000/api/todos
+           -H 'Content-Type: application/json'
+           -d '{ "title": "Example Todo 1"}'
+
+**Response**
+
+```javascript
+{
+	"id" : number,
+	"title" : string,
+	"checked" : bool,
+	"pinned" : bool
+}
+```
+
+---
+
+**Get Todo List**
+
+    GET /api/todos
+
+**CURL Example:**
+
+    curl -X GET http://localhost:3000/api/todos
+
+**Response**
+
+```javascript
+[
+	{
+		id: number,
+		title: string,
+		checked: bool,
+		pinned: bool,
+	},
+	{
+		id: number,
+		title: string,
+		checked: bool,
+		pinned: bool,
+	},
+]
+```
+
+---
+
+**Get Todo Detail**
+
+    GET /api/todos/:id
+
+**CURL Example:**
+
+    curl -X GET http://localhost:3000/api/todos/1652861603540
+
+---
+
+**Update Todo**
+
+    PATCH /api/todos/:id
+
+**CURL Example:**
+
+    curl -X PATCH http://localhost:3000/api/todos/1652861603540
+           -H 'Content-Type: application/json'
+           -d '{ "title": "Example Todo Updated" }'
+
+---
+
+**Delete Todo**
+
+    DELETE /api/todos/:id
+
+
+**CURL Example:**
+
+    curl -X DELETE http://localhost:3000/api/todos/1652861603540
