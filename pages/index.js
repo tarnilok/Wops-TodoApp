@@ -18,7 +18,6 @@ import arrow from "../public/assets/arrow.svg";
 import { successToastify, errorToastify } from "../toastify/toastify";
 
 export async function getServerSideProps() {
-  console.log(process.env.END_POINT)
   const response = await fetch(process.env.END_POINT + "/api/todos");
   const todos = await response.json();
   return { props: { todos } };
@@ -28,6 +27,8 @@ export default function Home({ todos }) {
   const [todoItem, setTodoItem] = useState("");
   const inputFocusRef = useRef();
   const router = useRouter();
+
+  console.log(process.env.NEXT_PUBLIC_END_POINT)
 
   const refreshData = () => {
     router.replace(router.asPath);
