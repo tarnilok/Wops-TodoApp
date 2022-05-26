@@ -8,7 +8,7 @@ import TodosRowContainer from "../components/TodosRowContainer";
 import Header from "../components/Header";
 
 //utils
-import { ApiFetcher, ApiHandler } from "../utils/ConnectApi";
+import { ApiHandler } from "../utils/ConnectApi";
 
 //assets
 import stroke from "../public/assets/stroke.svg";
@@ -18,6 +18,7 @@ import arrow from "../public/assets/arrow.svg";
 import { successToastify, errorToastify } from "../toastify/toastify";
 
 export async function getServerSideProps() {
+  console.log(process.env.END_POINT)
   const response = await fetch(process.env.END_POINT + "/api/todos");
   const todos = await response.json();
   return { props: { todos } };
