@@ -21,14 +21,10 @@ export async function getServerSideProps() {
   try {
     const response = await fetch(process.env.END_POINT + "/api/todos", {
       headers: {
-        'Content-Type': 'application/json',
-        "User-Agent":
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36", 
-      Accept: "application/json; charset=UTF-8",
+        "Content-Type": "application/json",
       },
     });
-    let todos = await response.json();
-    todos = JSON.parse(JSON.stringify(todos));
+    const todos = await response.json();
     return { props: { todos } };
   } catch (error) {
     console.log(error);
