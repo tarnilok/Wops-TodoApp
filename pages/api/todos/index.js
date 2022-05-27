@@ -8,10 +8,10 @@ export default function handler(req, res) {
       break;
     }
     case "POST": {
-      // let missingFields = [];
-      // if (!req.body.title) missingFields.push("title");
+      let missingFields = [];
+      if (!req.body.title) missingFields.push("title");
 
-      // if (missingFields.length === 0) {
+      if (missingFields.length === 0) {
         let data = database.get("todos");
         let todo = {
           id: Date.now(),
@@ -20,19 +20,19 @@ export default function handler(req, res) {
           pinned: false,
         };
 
-        if ("title" in req.body) todo.title = req.body.title;
+        todo.title = req.body.title;
 
         data.push(todo);
         database.set("todos", data);
 
         res.status(201).json(todo);
-      // } else {
-      //   res
-      //     .status(400)
-      //     .json({
-      //       message: `There is missing fields: ${missingFields.join(", ")}`,
-      //     });
-      // }
+      } else {
+        res
+          .status(400)
+          .json({
+            message: `There is missing fields: ${missingFields.join(", ")}`,
+          });
+      }
 
       break;
     }
