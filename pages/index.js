@@ -18,13 +18,20 @@ import arrow from "../public/assets/arrow.svg";
 import { successToastify, errorToastify } from "../toastify/toastify";
 
 export async function getServerSideProps() {
-  const response = await fetch(process.env.END_POINT + "/api/todos", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const todos = await response.json();
-  return { props: { todos } };
+  try {
+    const response = await fetch(process.env.END_POINT + "/api/todos", {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'User-Agent': '*',
+      },
+    });
+    let todos = await response.json();
+    // todos = JSON.parse(JSON.stringify(todos));
+    return { props: { todos } };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export default function Home({ todos }) {
