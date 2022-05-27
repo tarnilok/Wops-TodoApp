@@ -18,7 +18,11 @@ import arrow from "../public/assets/arrow.svg";
 import { successToastify, errorToastify } from "../toastify/toastify";
 
 export async function getServerSideProps() {
-  const response = await fetch(process.env.END_POINT + "/api/todos");
+  const response = await fetch(process.env.END_POINT + "/api/todos", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   const todos = await response.json();
   return { props: { todos } };
 }
@@ -28,11 +32,11 @@ export default function Home({ todos }) {
   const inputFocusRef = useRef();
   const router = useRouter();
 
-  console.log(process.env.NEXT_PUBLIC_END_POINT)
+  console.log(process.env.NEXT_PUBLIC_END_POINT);
 
   const refreshData = () => {
     router.replace(router.asPath);
-  }
+  };
 
   useEffect(() => {
     inputFocusRef.current.focus();
@@ -96,10 +100,7 @@ export default function Home({ todos }) {
             .filter((e) => e.pinned === true)
             .map((todo) => (
               <div key={todo.id}>
-                <TodosRowContainer
-                  todo={todo}
-                  refreshData={refreshData}
-                />
+                <TodosRowContainer todo={todo} refreshData={refreshData} />
               </div>
             ))}
           <hr className="mt-[44px] mb-[14px] h-[1.5px] border-none bg-[#E5E5E5] ml-[72px] mr-[72px] md:ml-0 md:mr-0" />
@@ -107,11 +108,7 @@ export default function Home({ todos }) {
             .filter((e) => e.pinned === false)
             .map((todo) => (
               <div key={todo.id}>
-                <TodosRowContainer
-                  todo={todo}
-                  ml={39}
-                  refreshData={refreshData}
-                />
+                <TodosRowContainer todo={todo} ml={39} refreshData={refreshData} />
               </div>
             ))}
         </div>
