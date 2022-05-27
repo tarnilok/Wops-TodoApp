@@ -8,8 +8,8 @@ export default function handler(req, res) {
       break;
     }
     case "POST": {
-      let missingFields = [];
-      if (!req.body?.title) missingFields.push("title");
+      // let missingFields = [];
+      // if (!req.body?.title) missingFields.push("title");
 
       if (missingFields.length === 0) {
         let data = database.get("todos");
@@ -20,7 +20,7 @@ export default function handler(req, res) {
           pinned: false,
         };
 
-        if ("title" in req.body) todo?.title = req.body?.title;
+        if ("title" in req.body) todo.title = req.body.title;
 
         data.push(todo);
         database.set("todos", data);
