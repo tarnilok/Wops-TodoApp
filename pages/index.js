@@ -28,7 +28,7 @@ export async function getServerSideProps() {
       },
     });
     let todos = await response.json();
-    // todos = JSON.parse(JSON.stringify(todos));
+    todos = JSON.parse(JSON.stringify(todos));
     return { props: { todos } };
   } catch (error) {
     console.log(error);
