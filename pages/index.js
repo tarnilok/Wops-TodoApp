@@ -24,6 +24,7 @@ export async function getServerSideProps() {
         "Content-Type": "application/json",
       },
     });
+    
     const todos = await response.json();
     return { props: { todos } };
   } catch (error) {
